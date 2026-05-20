@@ -1,0 +1,657 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:ital,wght@0,600;1,400&family=Rajdhani:wght@600;700&family=Libre+Baskerville:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;min-height:100vh;background:#0d0005;}
+
+.site-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;padding:1rem .5rem .5rem;position:relative;z-index:100;width:100%;}
+.tab{padding:.45rem 1rem;border-radius:50px;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);font-size:.75rem;cursor:pointer;transition:all .25s;background:rgba(255,255,255,.05);font-family:'Poppins',sans-serif;white-space:nowrap;}
+.tab.active{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.5);}
+
+.site{display:none;width:100%;}
+.site.visible{display:block;}
+
+/* ── SHARED ─────────────────────────────── */
+.page{display:none;width:100%;min-height:90vh;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1rem;position:relative;z-index:1;}
+.page.show{display:flex;}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:1.5rem;}
+.dot{width:7px;height:7px;border-radius:50%;cursor:pointer;transition:all .3s;background:rgba(255,255,255,.2);}
+.conf-p{position:fixed;pointer-events:none;z-index:9999;border-radius:3px;animation:cfall linear forwards;}
+@keyframes cfall{from{opacity:1;transform:translateY(-10px) rotate(0);}to{opacity:0;transform:translateY(100vh) rotate(540deg);}}
+.bday-flash{animation:flash .6s step-end infinite;}
+@keyframes flash{from,to{opacity:1;}50%{opacity:.4;}}
+
+/* ── SITE 1: Purple Star ─────────────────── */
+#s1{background:#030014;}
+#s1 .stars-bg{position:absolute;inset:0;pointer-events:none;z-index:0;}
+#s1 .star{position:absolute;border-radius:50%;background:#fff;animation:twk 2s infinite alternate;}
+@keyframes twk{from{opacity:.1;}to{opacity:1;}}
+#s1 .fheart{position:fixed;animation:fup linear infinite;font-size:1.2rem;opacity:0;z-index:0;pointer-events:none;}
+@keyframes fup{0%{opacity:0;transform:translateY(100vh) rotate(0);}10%{opacity:.7;}90%{opacity:.5;}100%{opacity:0;transform:translateY(-10vh) rotate(360deg);}}
+#s1 .title1{font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,8vw,4.5rem);color:#fff;text-shadow:0 0 30px #ff6bb3;text-align:center;}
+#s1 .sub1{font-size:.85rem;color:#f9a8d4;letter-spacing:.2em;text-transform:uppercase;margin:.5rem 0 1.5rem;}
+#s1 .cd-box{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1rem 0;}
+#s1 .cu{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:.9rem 1.4rem;min-width:75px;text-align:center;}
+#s1 .cn{font-size:2.2rem;font-weight:700;color:#fff;display:block;}
+#s1 .cl{font-size:.6rem;color:#f9a8d4;text-transform:uppercase;letter-spacing:.1em;}
+#s1 .btn1{background:linear-gradient(135deg,#e91e63,#9c27b0);color:#fff;border:none;padding:.9rem 2.2rem;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:1rem;transition:all .3s;}
+#s1 .btn1:hover{transform:translateY(-3px);}
+#s1 .wish-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;max-width:680px;width:100%;margin:1.2rem 0;}
+#s1 .wc{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:1.1rem;text-align:center;transition:transform .3s;}
+#s1 .wc:hover{transform:translateY(-4px);}
+#s1 .wc .wi{font-size:1.8rem;margin-bottom:.4rem;}
+#s1 .wc p{color:#f0e6ff;font-size:.82rem;line-height:1.5;}
+#s1 .letter{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:2rem;max-width:560px;width:100%;text-align:center;}
+#s1 .letter h2{font-family:'Dancing Script',cursive;font-size:2rem;color:#fff;margin-bottom:.8rem;}
+#s1 .letter p{color:#f0e6ff;line-height:1.8;font-size:.9rem;margin-bottom:.7rem;}
+#s1 .letter em{color:#ffb3d9;font-style:italic;}
+#s1 .ans{display:flex;gap:2rem;align-items:center;justify-content:center;width:100%;position:relative;min-height:80px;margin:1.5rem 0;}
+#s1 .yb{background:linear-gradient(135deg,#e91e63,#ff6b9d);color:#fff;border:none;padding:1.1rem 2.6rem;border-radius:50px;font-size:1.2rem;font-weight:700;cursor:pointer;animation:hb 1.5s infinite;}
+@keyframes hb{0%,100%{transform:scale(1);}14%{transform:scale(1.07);}28%{transform:scale(1);}}
+#s1 .nb{color:#aaa;border:1px solid rgba(255,255,255,.2);background:transparent;padding:.8rem 2rem;border-radius:50px;font-size:1rem;cursor:pointer;position:absolute;transition:all .1s;}
+#s1 .dot.on{background:#ff6bb3;}
+#s1 .ytitle{font-family:'Dancing Script',cursive;font-size:clamp(2.5rem,9vw,5rem);color:#fff;text-align:center;}
+
+/* ── SITE 2: Galaxy ──────────────────────── */
+#s2{background:#030014;}
+#s2 .gtitle{font-family:'Playfair Display',serif;font-size:clamp(2rem,7vw,4rem);background:linear-gradient(135deg,#a78bfa,#f0abfc,#67e8f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;line-height:1.2;}
+#s2 .glass{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:2rem;max-width:560px;width:100%;}
+#s2 .glass h2{font-family:'Playfair Display',serif;font-size:1.9rem;color:#f0abfc;margin-bottom:.8rem;text-align:center;}
+#s2 .glass p{color:#ddd6fe;line-height:1.85;font-size:.9rem;margin-bottom:.7rem;}
+#s2 .glass em{color:#f0abfc;}
+#s2 .rings{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0;}
+#s2 .ru{position:relative;width:80px;height:80px;}
+#s2 .ru svg{position:absolute;top:0;left:0;transform:rotate(-90deg);}
+#s2 .rnum{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+#s2 .rnum .n{font-size:1.4rem;font-weight:700;color:#a78bfa;}
+#s2 .rnum .l{font-size:.52rem;color:#c4b5fd;text-transform:uppercase;letter-spacing:.1em;}
+#s2 .gbtn{background:linear-gradient(135deg,#7c3aed,#a21caf);color:#fff;border:none;padding:.9rem 2.2rem;border-radius:50px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .3s;margin-top:1rem;}
+#s2 .gbtn:hover{transform:translateY(-3px);}
+#s2 .wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:.9rem;max-width:680px;width:100%;margin:1.2rem 0;}
+#s2 .wg{border:1px solid rgba(167,139,250,.25);border-radius:14px;padding:1.1rem;text-align:center;background:rgba(167,139,250,.05);transition:transform .3s;}
+#s2 .wg:hover{transform:scale(1.04);}
+#s2 .wg .i{font-size:1.7rem;margin-bottom:.4rem;}
+#s2 .wg p{font-size:.8rem;color:#c4b5fd;line-height:1.5;}
+#s2 .yw{background:linear-gradient(135deg,#7c3aed,#ec4899);color:#fff;border:none;padding:1.1rem 2.6rem;border-radius:50px;font-size:1.15rem;font-weight:700;cursor:pointer;animation:sp 1.8s infinite;}
+@keyframes sp{0%,100%{box-shadow:0 0 0 0 rgba(124,58,237,.5);}50%{box-shadow:0 0 0 16px rgba(124,58,237,0);}}
+#s2 .nw{color:#555;border:1px solid #333;background:transparent;padding:.75rem 2rem;border-radius:50px;font-size:.9rem;cursor:pointer;position:absolute;transition:all .1s;}
+#s2 .ans2{display:flex;gap:2rem;align-items:center;justify-content:center;width:100%;position:relative;min-height:80px;margin:1.5rem 0;}
+#s2 .dot.on{background:#a78bfa;}
+#s2 .ytitle{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,9vw,5rem);background:linear-gradient(135deg,#a78bfa,#f0abfc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;}
+
+/* ── SITE 3: Rose Cinema ─────────────────── */
+#s3{background:#0d0005;}
+#s3 .rtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,7vw,4.5rem);color:#f9a8d4;text-align:center;line-height:1.15;}
+#s3 .rsub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,3vw,1.6rem);color:#fda4af;text-align:center;}
+#s3 .div{display:flex;align-items:center;gap:.8rem;margin:1rem 0;}
+#s3 .div span:first-child,#s3 .div span:last-child{flex:1;height:1px;background:rgba(249,168,212,.25);}
+#s3 .cdrow{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;margin:1.2rem 0;}
+#s3 .cb{text-align:center;padding:.75rem 1.1rem;border:1px solid rgba(249,168,212,.2);border-radius:12px;background:rgba(249,168,212,.04);}
+#s3 .cbn{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:#f9a8d4;display:block;font-weight:700;}
+#s3 .cbl{font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:#fda4af;}
+#s3 .film{display:flex;gap:.9rem;overflow-x:auto;padding:.3rem 0;max-width:680px;width:100%;scrollbar-width:none;margin:1.1rem 0;}
+#s3 .film::-webkit-scrollbar{display:none;}
+#s3 .ff{min-width:140px;height:115px;border:1px solid rgba(249,168,212,.2);border-radius:12px;background:rgba(249,168,212,.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;flex-shrink:0;padding:.7rem;text-align:center;}
+#s3 .ff .fi{font-size:1.8rem;}
+#s3 .ff p{font-size:.72rem;color:#fda4af;line-height:1.4;}
+#s3 .lcard{max-width:560px;width:100%;border:1px solid rgba(249,168,212,.15);border-radius:18px;padding:2rem;background:rgba(249,168,212,.03);text-align:center;}
+#s3 .lcard h2{font-family:'Cormorant Garamond',serif;font-size:2rem;color:#f9a8d4;margin-bottom:.8rem;}
+#s3 .lcard p{color:#fecdd3;line-height:1.9;font-size:.9rem;margin-bottom:.7rem;}
+#s3 .lcard em{color:#f9a8d4;font-style:italic;}
+#s3 .rbtn{background:transparent;border:1px solid rgba(249,168,212,.45);color:#f9a8d4;padding:.85rem 2.1rem;border-radius:50px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;margin-top:1rem;}
+#s3 .rbtn:hover{background:rgba(249,168,212,.1);}
+#s3 .yr{background:linear-gradient(135deg,#be123c,#e11d48);color:#fff;border:none;padding:1rem 2.6rem;border-radius:50px;font-size:1.1rem;font-weight:700;cursor:pointer;animation:rp 2s infinite;}
+@keyframes rp{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
+#s3 .nr{color:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.1);background:transparent;padding:.65rem 1.7rem;border-radius:50px;font-size:.85rem;cursor:pointer;position:absolute;transition:all .1s;}
+#s3 .ans3{display:flex;gap:2rem;align-items:center;justify-content:center;width:100%;position:relative;min-height:80px;margin:1.5rem 0;}
+#s3 .dot.on{background:#f9a8d4;}
+#s3 .ytitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,9vw,5.5rem);color:#f9a8d4;text-align:center;}
+
+/* ── SITE 4: Neon City ───────────────────── */
+#s4{background:#050510;}
+#s4 .gbg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,200,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,200,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+#s4 .ntitle{font-family:'Rajdhani',sans-serif;font-size:clamp(2.5rem,8vw,5rem);color:#00ffc8;letter-spacing:.06em;text-align:center;line-height:1.1;text-transform:uppercase;}
+#s4 .np{color:#ff2d87;}
+#s4 .segs{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1.5rem 0;}
+#s4 .seg{border:1px solid rgba(0,255,200,.3);border-radius:8px;padding:.9rem 1.3rem;text-align:center;background:rgba(0,255,200,.04);}
+#s4 .sn{font-family:'Rajdhani',sans-serif;font-size:2.6rem;font-weight:700;color:#00ffc8;display:block;}
+#s4 .sl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:#00ffc870;}
+#s4 .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.8rem;max-width:680px;width:100%;margin:1.1rem 0;}
+#s4 .nc{border:1px solid rgba(255,45,135,.2);border-radius:12px;padding:1.1rem;background:rgba(255,45,135,.04);transition:all .3s;}
+#s4 .nc:hover{border-color:#ff2d87;transform:translateY(-4px);}
+#s4 .nc .ni{font-size:1.7rem;margin-bottom:.4rem;}
+#s4 .nc p{font-size:.78rem;color:#ff8fc0;line-height:1.5;}
+#s4 .term{max-width:560px;width:100%;border:1px solid rgba(0,255,200,.25);border-radius:12px;padding:1.8rem;background:rgba(0,255,200,.03);}
+#s4 .term .bar{display:flex;gap:.5rem;margin-bottom:1rem;}
+#s4 .term .dt{width:10px;height:10px;border-radius:50%;}
+#s4 .term p{color:#00ffc8;font-size:.88rem;line-height:1.9;font-family:'Poppins',sans-serif;}
+#s4 .term em{color:#ff2d87;font-style:normal;font-weight:700;}
+#s4 .cur{display:inline-block;width:7px;height:1em;background:#00ffc8;vertical-align:middle;animation:blink .8s step-end infinite;}
+@keyframes blink{from,to{opacity:1;}50%{opacity:0;}}
+#s4 .nbtn{background:transparent;border:1px solid #00ffc8;color:#00ffc8;padding:.85rem 2.1rem;border-radius:6px;font-size:.88rem;font-weight:700;cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:all .3s;margin-top:1rem;font-family:'Poppins',sans-serif;}
+#s4 .nbtn:hover{background:rgba(0,255,200,.1);}
+#s4 .yn{background:linear-gradient(135deg,#00ffc8,#00c8ff);color:#050510;border:none;padding:1rem 2.6rem;border-radius:6px;font-size:1.1rem;font-weight:700;cursor:pointer;letter-spacing:.08em;text-transform:uppercase;animation:nb 2s step-end infinite;font-family:'Poppins',sans-serif;}
+@keyframes nb{0%,90%,100%{opacity:1;}95%{opacity:.6;}}
+#s4 .ng{color:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.1);background:transparent;padding:.65rem 1.7rem;border-radius:6px;font-size:.8rem;cursor:pointer;position:absolute;text-transform:uppercase;letter-spacing:.05em;font-family:'Poppins',sans-serif;}
+#s4 .ans4{display:flex;gap:2rem;align-items:center;justify-content:center;width:100%;position:relative;min-height:80px;margin:1.5rem 0;}
+#s4 .dot.on{background:#00ffc8;}
+#s4 .ytitle{font-family:'Rajdhani',sans-serif;font-size:clamp(3rem,11vw,7rem);color:#00ffc8;text-transform:uppercase;letter-spacing:.05em;text-align:center;}
+.glitch{animation:ga .15s step-end;}
+@keyframes ga{0%{transform:translate(0);}25%{transform:translate(-3px,2px);}50%{transform:translate(3px,-2px);}100%{transform:translate(0);}}
+
+/* ── SITE 5: Fairytale ───────────────────── */
+#s5{background:#1a0a2e;}
+#s5 .ftitle{font-family:'Libre Baskerville',serif;font-size:clamp(2.2rem,7vw,4.5rem);color:#fde68a;text-align:center;line-height:1.2;}
+#s5 .fsub{font-family:'Libre Baskerville',serif;font-style:italic;color:#fcd34d;font-size:clamp(1rem,3vw,1.7rem);text-align:center;}
+#s5 .cdf-row{display:flex;gap:1.1rem;justify-content:center;flex-wrap:wrap;margin:1.4rem 0;}
+#s5 .cdf{background:rgba(253,230,138,.05);border:1px solid rgba(253,230,138,.2);border-radius:12px;padding:.8rem 1.1rem;text-align:center;}
+#s5 .cdfn{font-family:'Libre Baskerville',serif;font-size:2.3rem;color:#fde68a;display:block;font-weight:700;}
+#s5 .cdfl{font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:#fcd34d;}
+#s5 .cgrid5{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.9rem;max-width:680px;width:100%;margin:1.1rem 0;}
+#s5 .ch{border:1px solid rgba(253,230,138,.18);border-radius:14px;padding:1.1rem;background:rgba(253,230,138,.04);text-align:center;transition:transform .3s;}
+#s5 .ch:hover{transform:translateY(-4px) rotate(.4deg);}
+#s5 .ch .ci{font-size:1.8rem;margin-bottom:.4rem;}
+#s5 .ch p{font-size:.78rem;color:#fef3c7;line-height:1.5;}
+#s5 .scroll5{max-width:560px;width:100%;border:1px solid rgba(253,230,138,.18);border-radius:18px;padding:2rem;background:rgba(253,230,138,.03);text-align:center;}
+#s5 .scroll5 h2{font-family:'Libre Baskerville',serif;font-size:1.8rem;color:#fde68a;margin-bottom:.8rem;}
+#s5 .scroll5 p{color:#fef3c7;line-height:1.9;font-size:.9rem;margin-bottom:.7rem;}
+#s5 .scroll5 em{color:#fcd34d;font-style:italic;}
+#s5 .fbtn{background:linear-gradient(135deg,#d97706,#f59e0b);color:#1a0a2e;border:none;padding:.85rem 2.1rem;border-radius:50px;font-size:.92rem;font-weight:700;cursor:pointer;transition:all .3s;margin-top:1rem;}
+#s5 .fbtn:hover{transform:translateY(-2px);}
+#s5 .yf{background:linear-gradient(135deg,#d97706,#fcd34d);color:#1a0a2e;border:none;padding:1rem 2.6rem;border-radius:50px;font-size:1.1rem;font-weight:700;cursor:pointer;animation:mp 2s ease-in-out infinite;letter-spacing:.05em;}
+@keyframes mp{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+#s5 .nf{color:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.1);background:transparent;padding:.65rem 1.7rem;border-radius:50px;font-size:.82rem;cursor:pointer;position:absolute;}
+#s5 .ans5{display:flex;gap:2rem;align-items:center;justify-content:center;width:100%;position:relative;min-height:80px;margin:1.5rem 0;}
+#s5 .dot.on{background:#fde68a;}
+#s5 .ytitle{font-family:'Libre Baskerville',serif;font-size:clamp(2.5rem,8vw,5.5rem);color:#fde68a;text-align:center;}
+</style>
+
+<div class="site-tabs">
+  <div class="tab active" onclick="switchSite(1)">💜 Purple Stars</div>
+  <div class="tab" onclick="switchSite(2)">🌌 Galaxy</div>
+  <div class="tab" onclick="switchSite(3)">🌹 Rose Cinema</div>
+  <div class="tab" onclick="switchSite(4)">⚡ Neon City</div>
+  <div class="tab" onclick="switchSite(5)">✨ Fairytale</div>
+</div>
+
+<!-- ════════════════ SITE 1 ════════════════ -->
+<div class="site visible" id="s1">
+  <div class="stars-bg" id="starsEl"></div>
+  <div class="page show" id="s1p1">
+    <div style="text-align:center;position:relative;z-index:1;">
+      <div style="font-size:3.5rem;animation:hb 1s infinite alternate;">👑</div>
+      <div class="title1">Happy Birthday</div>
+      <div class="title1" style="color:#ffb3d9;font-size:clamp(3rem,10vw,5.5rem);">Dua</div>
+      <div class="sub1">Born to shine ✨ May 21, 2003 · Turning 23</div>
+      <div class="cd-box" id="s1cd">
+        <div class="cu"><span class="cn" id="s1h">--</span><span class="cl">Hours</span></div>
+        <div class="cu"><span class="cn" id="s1m">--</span><span class="cl">Mins</span></div>
+        <div class="cu"><span class="cn" id="s1s">--</span><span class="cl">Secs</span></div>
+      </div>
+      <div id="s1now" style="display:none;font-family:'Dancing Script',cursive;font-size:2.5rem;color:#ffeb3b;" class="bday-flash">🎉 Dua is 23! Happy Birthday! 🎂</div>
+      <button class="btn1" onclick="pg('s1',2)">Open Her Gift 🎁</button>
+    </div>
+    <div class="dots"><div class="dot on" onclick="pg('s1',1)"></div><div class="dot" onclick="pg('s1',2)"></div><div class="dot" onclick="pg('s1',3)"></div><div class="dot" onclick="pg('s1',4)"></div><div class="dot" onclick="pg('s1',5)"></div></div>
+  </div>
+  <div class="page" id="s1p2">
+    <div style="text-align:center;font-size:3rem;">🎂</div>
+    <div class="title1" style="font-size:clamp(2rem,6vw,3.5rem);text-align:center;">You're 23 & Magical!</div>
+    <div class="sub1">Here's what I wish for you...</div>
+    <div class="wish-grid">
+      <div class="wc"><div class="wi">🌸</div><p>May every day bloom with joy as beautiful as you</p></div>
+      <div class="wc"><div class="wi">⭐</div><p>May your dreams be bigger than the sky and come true</p></div>
+      <div class="wc"><div class="wi">💫</div><p>May 23 be the most magical year of your life</p></div>
+      <div class="wc"><div class="wi">🦋</div><p>May you spread your wings and fly higher than ever</p></div>
+      <div class="wc"><div class="wi">🌙</div><p>May even the moon be jealous of how you shine</p></div>
+      <div class="wc"><div class="wi">💖</div><p>May love surround you in ways you never imagined</p></div>
+    </div>
+    <button class="btn1" onclick="pg('s1',3)">Read My Letter 💌</button>
+    <div class="dots"><div class="dot" onclick="pg('s1',1)"></div><div class="dot on" onclick="pg('s1',2)"></div><div class="dot" onclick="pg('s1',3)"></div><div class="dot" onclick="pg('s1',4)"></div><div class="dot" onclick="pg('s1',5)"></div></div>
+  </div>
+  <div class="page" id="s1p3">
+    <div class="letter">
+      <div style="font-size:2rem;">💌</div>
+      <h2>My Dearest Dua,</h2>
+      <p>On this <em>beautiful day</em> you came into this world, I want you to know that the universe became a little more extraordinary because of you.</p>
+      <p>Every moment with you feels like a dream I never want to wake up from. Your laugh, your eyes, your heart — they are my favorite things in the entire world.</p>
+      <p>I've been thinking about <em>forever</em>, and forever doesn't feel long enough when I imagine it with you. So on your 23rd birthday... 💍</p>
+    </div>
+    <button class="btn1" onclick="pg('s1',4)" style="margin-top:1rem;">I'm Ready... 💍</button>
+    <div class="dots"><div class="dot" onclick="pg('s1',1)"></div><div class="dot" onclick="pg('s1',2)"></div><div class="dot on" onclick="pg('s1',3)"></div><div class="dot" onclick="pg('s1',4)"></div><div class="dot" onclick="pg('s1',5)"></div></div>
+  </div>
+  <div class="page" id="s1p4">
+    <div style="text-align:center;">
+      <div style="font-size:4rem;animation:hb 1.5s infinite alternate;">💍</div>
+      <div class="title1" style="font-size:clamp(2rem,7vw,4rem);margin:1rem 0;">Dua,<br>Will you marry me?</div>
+      <p style="color:#f9a8d4;font-size:.88rem;margin-bottom:.5rem;">Choose wisely 😏</p>
+      <div class="ans" id="s1ans">
+        <button class="yb" onclick="pg('s1',5);celebrate()">Yes! 💕</button>
+        <button class="nb" id="s1nb" onmouseenter="flee('s1nb')" ontouchstart="flee('s1nb')">No</button>
+      </div>
+      <p style="color:rgba(255,255,255,.2);font-size:.7rem;">(try clicking No... I dare you 😈)</p>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s1',1)"></div><div class="dot" onclick="pg('s1',2)"></div><div class="dot" onclick="pg('s1',3)"></div><div class="dot on" onclick="pg('s1',4)"></div><div class="dot" onclick="pg('s1',5)"></div></div>
+  </div>
+  <div class="page" id="s1p5">
+    <div style="text-align:center;">
+      <div style="font-size:5rem;animation:hb 1s infinite alternate;">💍</div>
+      <div class="ytitle">She Said YES! 🎉</div>
+      <div style="font-size:2rem;margin:.8rem 0;">💕✨🥂🎊🌹</div>
+      <div class="letter" style="margin-top:1rem;">
+        <p>Dua, you've made me the happiest person alive! I promise to love you every single day, to make you laugh, to be your home, your best friend, and your forever person.</p>
+        <p><em>"I love you more than words can say, and today is just the beginning of our forever 💕"</em></p>
+        <p style="color:#f9a8d4;">Happy 23rd Birthday, my love 🎂💍</p>
+      </div>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s1',1)"></div><div class="dot" onclick="pg('s1',2)"></div><div class="dot" onclick="pg('s1',3)"></div><div class="dot" onclick="pg('s1',4)"></div><div class="dot on" onclick="pg('s1',5)"></div></div>
+  </div>
+</div>
+
+<!-- ════════════════ SITE 2 ════════════════ -->
+<div class="site" id="s2">
+  <div class="page show" id="s2p1">
+    <div style="text-align:center;position:relative;z-index:1;">
+      <div style="font-size:3rem;animation:sp 2s infinite;">🌙</div>
+      <div class="gtitle">Across the galaxy,<br>happy birthday Dua</div>
+      <div style="color:#a78bfa;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;margin:.5rem 0;">born: may 21, 2003 · turning 23 ✨</div>
+      <div class="rings" id="s2rings">
+        <div class="ru"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(167,139,250,.2)" stroke-width="5"/><circle id="s2rH" cx="40" cy="40" r="34" fill="none" stroke="#a78bfa" stroke-width="5" stroke-dasharray="213.6" stroke-dashoffset="0" stroke-linecap="round"/></svg><div class="rnum"><span class="n" id="s2h">--</span><span class="l">hrs</span></div></div>
+        <div class="ru"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(240,171,252,.2)" stroke-width="5"/><circle id="s2rM" cx="40" cy="40" r="34" fill="none" stroke="#f0abfc" stroke-width="5" stroke-dasharray="213.6" stroke-dashoffset="0" stroke-linecap="round"/></svg><div class="rnum"><span class="n" id="s2m">--</span><span class="l">min</span></div></div>
+        <div class="ru"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="rgba(103,232,249,.2)" stroke-width="5"/><circle id="s2rS" cx="40" cy="40" r="34" fill="none" stroke="#67e8f9" stroke-width="5" stroke-dasharray="213.6" stroke-dashoffset="0" stroke-linecap="round"/></svg><div class="rnum"><span class="n" id="s2s">--</span><span class="l">sec</span></div></div>
+      </div>
+      <div id="s2now" style="display:none;font-family:'Playfair Display',serif;font-size:2.2rem;color:#f0abfc;" class="bday-flash">🎂 She's 23! Happy Birthday Dua! 🌙</div>
+      <button class="gbtn" onclick="pg('s2',2)">Begin the journey 🚀</button>
+    </div>
+    <div class="dots"><div class="dot on" onclick="pg('s2',1)"></div><div class="dot" onclick="pg('s2',2)"></div><div class="dot" onclick="pg('s2',3)"></div><div class="dot" onclick="pg('s2',4)"></div><div class="dot" onclick="pg('s2',5)"></div></div>
+  </div>
+  <div class="page" id="s2p2">
+    <div style="text-align:center;font-size:2rem;">✨</div>
+    <div class="gtitle" style="font-size:clamp(1.8rem,5vw,2.8rem);">23 wishes from the stars</div>
+    <div style="color:#a78bfa;font-size:.82rem;margin:.5rem 0;">One for each year of your beautiful life</div>
+    <div class="wgrid">
+      <div class="wg"><div class="i">🌠</div><p>May every shooting star carry your wish already</p></div>
+      <div class="wg"><div class="i">🪐</div><p>May your world feel as vast and magical as the universe</p></div>
+      <div class="wg"><div class="i">💜</div><p>May your heart always find its way home to joy</p></div>
+      <div class="wg"><div class="i">🌌</div><p>May 23 open galaxies of possibilities for you</p></div>
+      <div class="wg"><div class="i">⚡</div><p>May your energy light up every room you walk into</p></div>
+      <div class="wg"><div class="i">🌸</div><p>May love find you bigger than you ever imagined</p></div>
+    </div>
+    <button class="gbtn" onclick="pg('s2',3)">Read my heart 💌</button>
+    <div class="dots"><div class="dot" onclick="pg('s2',1)"></div><div class="dot on" onclick="pg('s2',2)"></div><div class="dot" onclick="pg('s2',3)"></div><div class="dot" onclick="pg('s2',4)"></div><div class="dot" onclick="pg('s2',5)"></div></div>
+  </div>
+  <div class="page" id="s2p3">
+    <div class="glass">
+      <div style="font-size:2rem;text-align:center;margin-bottom:.8rem;">🌙</div>
+      <h2>Dear Dua,</h2>
+      <p>You know how they say some things are written in the stars? I think <em>you</em> were written in mine. Every time I look up at the night sky, all I can think about is you.</p>
+      <p>23 years ago today, someone incredible arrived in this world — someone who makes every ordinary moment feel like a scene from a fairy tale.</p>
+      <p>I've been carrying something in my heart for a while now. And tonight, under all these stars, I finally say it... 💍</p>
+    </div>
+    <button class="gbtn" onclick="pg('s2',4)" style="margin-top:1rem;">I'm ready 💍</button>
+    <div class="dots"><div class="dot" onclick="pg('s2',1)"></div><div class="dot" onclick="pg('s2',2)"></div><div class="dot on" onclick="pg('s2',3)"></div><div class="dot" onclick="pg('s2',4)"></div><div class="dot" onclick="pg('s2',5)"></div></div>
+  </div>
+  <div class="page" id="s2p4">
+    <div style="text-align:center;">
+      <div style="font-size:4rem;animation:sp 1.5s infinite;">💍</div>
+      <div class="gtitle" style="margin:1rem 0;">Dua, will you<br>be my forever?</div>
+      <p style="color:#a78bfa;font-size:.88rem;margin-bottom:.5rem;">In every universe — it's always you</p>
+      <div class="ans2" id="s2ans">
+        <button class="yw" onclick="pg('s2',5);celebrate()">Yes, always 💜</button>
+        <button class="nw" id="s2nb" onmouseenter="flee('s2nb')" ontouchstart="flee('s2nb')">No</button>
+      </div>
+      <p style="color:rgba(255,255,255,.18);font-size:.7rem;">(the No button lives in a black hole 😏)</p>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s2',1)"></div><div class="dot" onclick="pg('s2',2)"></div><div class="dot" onclick="pg('s2',3)"></div><div class="dot on" onclick="pg('s2',4)"></div><div class="dot" onclick="pg('s2',5)"></div></div>
+  </div>
+  <div class="page" id="s2p5">
+    <div style="text-align:center;">
+      <div style="font-size:5rem;animation:sp 1s infinite;">💜</div>
+      <div class="ytitle">Written in the stars 🌟</div>
+      <div style="font-size:1.8rem;margin:.8rem 0;">💜✨🌙🌸💍</div>
+      <div class="glass" style="margin-top:1rem;text-align:center;">
+        <p style="color:#e9d5ff;line-height:1.85;font-style:italic;">"From this day forward, every star in the sky belongs to our story. Happy 23rd birthday, my love. You said yes — and that's the best thing that's ever happened to me. 💍"</p>
+        <p style="color:#a78bfa;margin-top:.8rem;font-size:.85rem;">Happy birthday Dua — the girl written in my stars 🌙</p>
+      </div>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s2',1)"></div><div class="dot" onclick="pg('s2',2)"></div><div class="dot" onclick="pg('s2',3)"></div><div class="dot" onclick="pg('s2',4)"></div><div class="dot on" onclick="pg('s2',5)"></div></div>
+  </div>
+</div>
+
+<!-- ════════════════ SITE 3 ════════════════ -->
+<div class="site" id="s3">
+  <div class="page show" id="s3p1">
+    <div style="text-align:center;">
+      <div style="font-size:3.5rem;">🌹</div>
+      <div class="rtitle">Happy Birthday,<br>Dua</div>
+      <div class="rsub">born to be loved · may 21, 2003</div>
+      <div class="div"><span></span><span style="font-size:1.1rem;">🌹</span><span></span></div>
+      <div class="cdrow" id="s3cd">
+        <div class="cb"><span class="cbn" id="s3h">--</span><span class="cbl">Hours</span></div>
+        <div class="cb"><span class="cbn" id="s3m">--</span><span class="cbl">Minutes</span></div>
+        <div class="cb"><span class="cbn" id="s3s">--</span><span class="cbl">Seconds</span></div>
+      </div>
+      <div id="s3now" style="display:none;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:2.5rem;color:#f9a8d4;" class="bday-flash">She bloomed into 23 🌹</div>
+      <button class="rbtn" onclick="pg('s3',2)">Enter her world 🌹</button>
+    </div>
+    <div class="dots"><div class="dot on" onclick="pg('s3',1)"></div><div class="dot" onclick="pg('s3',2)"></div><div class="dot" onclick="pg('s3',3)"></div><div class="dot" onclick="pg('s3',4)"></div><div class="dot" onclick="pg('s3',5)"></div></div>
+  </div>
+  <div class="page" id="s3p2">
+    <div style="text-align:center;font-size:2.5rem;">🎬</div>
+    <div class="rtitle" style="font-size:clamp(2rem,5.5vw,3.2rem);">Scenes from your life</div>
+    <div class="rsub">23 beautiful chapters</div>
+    <div class="film">
+      <div class="ff"><div class="fi">🌸</div><p>The girl who makes every room warmer</p></div>
+      <div class="ff"><div class="fi">😂</div><p>That laugh that fixes everything</p></div>
+      <div class="ff"><div class="fi">💫</div><p>Effortlessly extraordinary</p></div>
+      <div class="ff"><div class="fi">🌙</div><p>Beautiful even in quiet moments</p></div>
+      <div class="ff"><div class="fi">💕</div><p>Worth writing poems about</p></div>
+      <div class="ff"><div class="fi">✨</div><p>A whole universe in one person</p></div>
+    </div>
+    <button class="rbtn" onclick="pg('s3',3)">Read my letter 💌</button>
+    <div class="dots"><div class="dot" onclick="pg('s3',1)"></div><div class="dot on" onclick="pg('s3',2)"></div><div class="dot" onclick="pg('s3',3)"></div><div class="dot" onclick="pg('s3',4)"></div><div class="dot" onclick="pg('s3',5)"></div></div>
+  </div>
+  <div class="page" id="s3p3">
+    <div class="lcard">
+      <div style="font-size:2rem;margin-bottom:.8rem;">💌</div>
+      <h2>My darling Dua,</h2>
+      <p>There's a kind of love that feels like a warm evening and a slow song and a rose that never quite wilts. That's what loving you feels like.</p>
+      <p>On your 23rd birthday, I want you to know that you are <em>everything</em> — every good thing I never thought I deserved, every beautiful thing I used to dream about.</p>
+      <p>I've been rehearsing this moment a thousand times. Here it finally is... 🌹</p>
+    </div>
+    <button class="rbtn" onclick="pg('s3',4)" style="margin-top:1rem;">The big moment 🌹</button>
+    <div class="dots"><div class="dot" onclick="pg('s3',1)"></div><div class="dot" onclick="pg('s3',2)"></div><div class="dot on" onclick="pg('s3',3)"></div><div class="dot" onclick="pg('s3',4)"></div><div class="dot" onclick="pg('s3',5)"></div></div>
+  </div>
+  <div class="page" id="s3p4">
+    <div style="text-align:center;">
+      <div style="font-size:3.5rem;">💍</div>
+      <div class="rtitle" style="margin:.8rem 0;">Will you marry me,<br>Dua?</div>
+      <div class="rsub">🌹 one question. one answer. forever. 🌹</div>
+      <div class="ans3" id="s3ans">
+        <button class="yr" onclick="pg('s3',5);celebrate()">Yes, my love 🌹</button>
+        <button class="nr" id="s3nb" onmouseenter="flee('s3nb')" ontouchstart="flee('s3nb')">No</button>
+      </div>
+      <p style="color:rgba(255,255,255,.15);font-size:.7rem;">(No button is made of petals... it blows away 😌)</p>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s3',1)"></div><div class="dot" onclick="pg('s3',2)"></div><div class="dot" onclick="pg('s3',3)"></div><div class="dot on" onclick="pg('s3',4)"></div><div class="dot" onclick="pg('s3',5)"></div></div>
+  </div>
+  <div class="page" id="s3p5">
+    <div style="text-align:center;">
+      <div style="font-size:4rem;">🌹</div>
+      <div class="ytitle">She said Yes 💍</div>
+      <div class="div" style="max-width:350px;margin:1rem auto;"><span></span><span style="font-size:1.3rem;">🌹</span><span></span></div>
+      <div class="lcard" style="margin-top:.5rem;">
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:#fecdd3;line-height:1.9;">"Like a rose that blooms year after year — that's how I'll love you. Happy 23rd birthday, Dua. You are my forever. 💍🌹"</p>
+        <div style="font-size:1.6rem;margin-top:.8rem;">🌹 💍 🌸 💕 ✨</div>
+      </div>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s3',1)"></div><div class="dot" onclick="pg('s3',2)"></div><div class="dot" onclick="pg('s3',3)"></div><div class="dot" onclick="pg('s3',4)"></div><div class="dot on" onclick="pg('s3',5)"></div></div>
+  </div>
+</div>
+
+<!-- ════════════════ SITE 4 ════════════════ -->
+<div class="site" id="s4">
+  <div class="gbg"></div>
+  <div class="page show" id="s4p1">
+    <div style="text-align:center;position:relative;z-index:1;">
+      <div style="font-family:'Rajdhani',sans-serif;font-size:.9rem;color:#00ffc870;letter-spacing:.3em;text-transform:uppercase;margin-bottom:.5rem;">05 · 21 · 2003 → 2026</div>
+      <div class="ntitle"><span class="np">Dua</span><br>Happy Birthday</div>
+      <div style="color:#00ffc870;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;margin:.5rem 0;">23 years of magic · countdown</div>
+      <div class="segs" id="s4cd">
+        <div class="seg"><span class="sn" id="s4h">--</span><span class="sl">Hours</span></div>
+        <div class="seg"><span class="sn" id="s4m">--</span><span class="sl">Mins</span></div>
+        <div class="seg"><span class="sn" id="s4s">--</span><span class="sl">Secs</span></div>
+      </div>
+      <div id="s4now" style="display:none;font-family:'Rajdhani',sans-serif;font-size:2.8rem;color:#ff2d87;text-transform:uppercase;letter-spacing:.1em;" class="bday-flash">SHE'S 23 ⚡ HAPPY BIRTHDAY!</div>
+      <button class="nbtn" onclick="pg('s4',2)">Launch → 🚀</button>
+    </div>
+    <div class="dots"><div class="dot on" onclick="pg('s4',1)"></div><div class="dot" onclick="pg('s4',2)"></div><div class="dot" onclick="pg('s4',3)"></div><div class="dot" onclick="pg('s4',4)"></div><div class="dot" onclick="pg('s4',5)"></div></div>
+  </div>
+  <div class="page" id="s4p2">
+    <div style="text-align:center;font-family:'Rajdhani',sans-serif;font-size:.9rem;color:#ff2d8780;letter-spacing:.2em;margin-bottom:.5rem;">BIRTHDAY EDITION</div>
+    <div class="ntitle" style="font-size:clamp(2rem,5.5vw,3.5rem);">You're <span class="np">23</span> & Iconic</div>
+    <div class="cgrid">
+      <div class="nc"><div class="ni">⚡</div><p>Energy that could power the whole city</p></div>
+      <div class="nc"><div class="ni">💻</div><p>Smart enough to break every algorithm</p></div>
+      <div class="nc"><div class="ni">🎯</div><p>Every goal you set, you absolutely hit</p></div>
+      <div class="nc"><div class="ni">🌐</div><p>A whole vibe no one can replicate</p></div>
+      <div class="nc"><div class="ni">🔥</div><p>Born rare, living iconic, staying unmatched</p></div>
+      <div class="nc"><div class="ni">💕</div><p>The kind of girl cities write songs about</p></div>
+    </div>
+    <button class="nbtn" onclick="pg('s4',3)">Next →</button>
+    <div class="dots"><div class="dot" onclick="pg('s4',1)"></div><div class="dot on" onclick="pg('s4',2)"></div><div class="dot" onclick="pg('s4',3)"></div><div class="dot" onclick="pg('s4',4)"></div><div class="dot" onclick="pg('s4',5)"></div></div>
+  </div>
+  <div class="page" id="s4p3">
+    <div class="term">
+      <div class="bar"><div class="dt" style="background:#ff5f57;"></div><div class="dt" style="background:#febc2e;"></div><div class="dt" style="background:#28c840;"></div><span style="font-size:.72rem;color:#00ffc850;margin-left:.5rem;letter-spacing:.08em;">message_from_heart.txt</span></div>
+      <p>&gt; initiating transmission...</p>
+      <p>&gt; <em>Dua</em>, you are the rarest person I've ever known.</p>
+      <p>&gt; In a world full of noise, you're the signal that always makes sense to me.</p>
+      <p>&gt; Every version of the future I simulate... has you in it.</p>
+      <p>&gt; So on your 23rd birthday, I have one final query... 💍</p>
+      <p>&gt; <span class="cur"></span></p>
+    </div>
+    <button class="nbtn" onclick="pg('s4',4)">Run query 💍</button>
+    <div class="dots"><div class="dot" onclick="pg('s4',1)"></div><div class="dot" onclick="pg('s4',2)"></div><div class="dot on" onclick="pg('s4',3)"></div><div class="dot" onclick="pg('s4',4)"></div><div class="dot" onclick="pg('s4',5)"></div></div>
+  </div>
+  <div class="page" id="s4p4">
+    <div style="text-align:center;">
+      <div style="font-family:'Rajdhani',sans-serif;font-size:.9rem;color:#00ffc870;letter-spacing:.2em;text-transform:uppercase;">final query · dua · 2026</div>
+      <div class="ntitle" style="font-size:clamp(2rem,6vw,4rem);margin:.8rem 0;">Will you<br><span class="np">marry me?</span></div>
+      <div style="color:#00ffc870;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem;">select one option below ↓</div>
+      <div class="ans4" id="s4ans">
+        <button class="yn" onclick="pg('s4',5);celebrate()">YES ⚡</button>
+        <button class="ng" id="s4nb" onmouseenter="flee('s4nb')" ontouchstart="flee('s4nb')">No</button>
+      </div>
+      <p style="color:rgba(255,255,255,.15);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;">(No button keeps glitching — ERR_404 😏)</p>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s4',1)"></div><div class="dot" onclick="pg('s4',2)"></div><div class="dot" onclick="pg('s4',3)"></div><div class="dot on" onclick="pg('s4',4)"></div><div class="dot" onclick="pg('s4',5)"></div></div>
+  </div>
+  <div class="page" id="s4p5">
+    <div style="text-align:center;">
+      <div style="font-size:4rem;">⚡</div>
+      <div class="ytitle"><span class="np">She</span> said<br>YES</div>
+      <div class="term" style="margin-top:1.2rem;text-align:left;">
+        <p>&gt; <em>status: forever confirmed 💍</em></p>
+        <p>&gt; "You are the most beautiful glitch in my system, Dua. The bug I never want to fix. Happy 23rd birthday — and yes, this is forever. 💍⚡"</p>
+        <p style="margin-top:.5rem;color:#00ffc870;">&gt; happy birthday · dua · always <span class="cur"></span></p>
+      </div>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s4',1)"></div><div class="dot" onclick="pg('s4',2)"></div><div class="dot" onclick="pg('s4',3)"></div><div class="dot" onclick="pg('s4',4)"></div><div class="dot on" onclick="pg('s4',5)"></div></div>
+  </div>
+</div>
+
+<!-- ════════════════ SITE 5 ════════════════ -->
+<div class="site" id="s5">
+  <div class="page show" id="s5p1">
+    <div style="text-align:center;">
+      <div style="font-family:'Libre Baskerville',serif;font-style:italic;font-size:.9rem;color:#fcd34d70;letter-spacing:.15em;margin-bottom:.5rem;">once upon a time...</div>
+      <div style="font-size:3rem;">✨</div>
+      <div class="ftitle">A princess named<br><span style="color:#f59e0b;">Dua</span> turned 23</div>
+      <div class="fsub">may 21, 2003 · born to be adored</div>
+      <div class="cdf-row" id="s5cd">
+        <div class="cdf"><span class="cdfn" id="s5h">--</span><span class="cdfl">Hours</span></div>
+        <div class="cdf"><span class="cdfn" id="s5m">--</span><span class="cdfl">Minutes</span></div>
+        <div class="cdf"><span class="cdfn" id="s5s">--</span><span class="cdfl">Seconds</span></div>
+      </div>
+      <div id="s5now" style="display:none;font-family:'Libre Baskerville',serif;font-style:italic;font-size:2.2rem;color:#fde68a;" class="bday-flash">The princess is 23! 🎂✨</div>
+      <button class="fbtn" onclick="pg('s5',2)">Open the storybook 📖</button>
+    </div>
+    <div class="dots"><div class="dot on" onclick="pg('s5',1)"></div><div class="dot" onclick="pg('s5',2)"></div><div class="dot" onclick="pg('s5',3)"></div><div class="dot" onclick="pg('s5',4)"></div><div class="dot" onclick="pg('s5',5)"></div></div>
+  </div>
+  <div class="page" id="s5p2">
+    <div style="text-align:center;font-size:2.5rem;">📖</div>
+    <div class="ftitle" style="font-size:clamp(1.8rem,5vw,3rem);">23 chapters of magic</div>
+    <div class="fsub">Each one more wonderful than the last</div>
+    <div class="cgrid5">
+      <div class="ch"><div class="ci">👸</div><p>A princess who doesn't need saving — she saves the day herself</p></div>
+      <div class="ch"><div class="ci">🌺</div><p>Every garden she walks through blooms a little brighter</p></div>
+      <div class="ch"><div class="ci">🦋</div><p>She transforms every ordinary thing into something beautiful</p></div>
+      <div class="ch"><div class="ci">⭐</div><p>The kind of magic that makes people believe in fairy tales again</p></div>
+      <div class="ch"><div class="ci">🌙</div><p>Even the moon stops to admire her on quiet nights</p></div>
+      <div class="ch"><div class="ci">💛</div><p>Warmth that turns strangers into family and moments into memories</p></div>
+    </div>
+    <button class="fbtn" onclick="pg('s5',3)">Chapter 24: The letter 💌</button>
+    <div class="dots"><div class="dot" onclick="pg('s5',1)"></div><div class="dot on" onclick="pg('s5',2)"></div><div class="dot" onclick="pg('s5',3)"></div><div class="dot" onclick="pg('s5',4)"></div><div class="dot" onclick="pg('s5',5)"></div></div>
+  </div>
+  <div class="page" id="s5p3">
+    <div class="scroll5">
+      <div style="font-size:2rem;margin-bottom:.7rem;">📜</div>
+      <h2>A letter from my heart</h2>
+      <p>Dear Dua,</p>
+      <p>In every fairy tale I've ever heard, the prince searches the whole kingdom for the one person who makes the story worth telling. I found her — and she's you.</p>
+      <p>You're the chapter that changed the whole book. <em>My favourite part of every single day.</em></p>
+      <p>And on your 23rd birthday, I have one magical question for you... 💍✨</p>
+    </div>
+    <button class="fbtn" onclick="pg('s5',4)" style="margin-top:1rem;">The magic question ✨</button>
+    <div class="dots"><div class="dot" onclick="pg('s5',1)"></div><div class="dot" onclick="pg('s5',2)"></div><div class="dot on" onclick="pg('s5',3)"></div><div class="dot" onclick="pg('s5',4)"></div><div class="dot" onclick="pg('s5',5)"></div></div>
+  </div>
+  <div class="page" id="s5p4">
+    <div style="text-align:center;">
+      <div style="font-size:4rem;animation:mp 1.5s ease-in-out infinite;">💍</div>
+      <div class="ftitle" style="margin:.8rem 0;">Dua, will you<br>be my happily ever after?</div>
+      <div class="fsub" style="margin-bottom:1rem;">✨ the most important page in our story ✨</div>
+      <div class="ans5" id="s5ans">
+        <button class="yf" onclick="pg('s5',5);celebrate()">Yes! Always! ✨</button>
+        <button class="nf" id="s5nb" onmouseenter="flee('s5nb')" ontouchstart="flee('s5nb')">No</button>
+      </div>
+      <p style="color:rgba(255,255,255,.15);font-size:.7rem;font-style:italic;">(the No button got enchanted away 🪄)</p>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s5',1)"></div><div class="dot" onclick="pg('s5',2)"></div><div class="dot" onclick="pg('s5',3)"></div><div class="dot on" onclick="pg('s5',4)"></div><div class="dot" onclick="pg('s5',5)"></div></div>
+  </div>
+  <div class="page" id="s5p5">
+    <div style="text-align:center;">
+      <div style="font-size:4rem;animation:mp 1s ease-in-out infinite alternate;">✨</div>
+      <div class="ytitle">And she said<br><em>Yes</em> 💍</div>
+      <div style="font-size:1.8rem;margin:.8rem 0;animation:mp 1.5s ease-in-out infinite alternate;">🌸 🦋 🌙 🌺 💕</div>
+      <div class="scroll5" style="margin-top:.5rem;">
+        <p style="font-family:'Libre Baskerville',serif;font-style:italic;color:#fef3c7;line-height:1.9;">"And they lived happily ever after... not because life is perfect, but because they chose each other every single day. Happy 23rd birthday, my Dua. Our story is just beginning. 💍✨"</p>
+        <p style="color:#fcd34d70;font-size:.82rem;margin-top:.8rem;font-style:italic;">...and they lived happily ever after 💛</p>
+      </div>
+    </div>
+    <div class="dots"><div class="dot" onclick="pg('s5',1)"></div><div class="dot" onclick="pg('s5',2)"></div><div class="dot" onclick="pg('s5',3)"></div><div class="dot" onclick="pg('s5',4)"></div><div class="dot on" onclick="pg('s5',5)"></div></div>
+  </div>
+</div>
+
+<script>
+const BDAY = new Date('2026-05-21T00:00:00');
+const hits = {};
+
+function getDiff() {
+  return BDAY - new Date();
+}
+
+function fmt(n) { return String(Math.max(0,n)).padStart(2,'0'); }
+
+function tick() {
+  const diff = getDiff();
+  const gone = diff <= 0;
+  const h = gone ? 0 : Math.floor(diff/3600000);
+  const m = gone ? 0 : Math.floor((diff%3600000)/60000);
+  const s = gone ? 0 : Math.floor((diff%60000)/1000);
+
+  const ids = [
+    ['s1h','s1m','s1s','s1cd','s1now'],
+    ['s2h','s2m','s2s','s2rings','s2now'],
+    ['s3h','s3m','s3s','s3cd','s3now'],
+    ['s4h','s4m','s4s','s4cd','s4now'],
+    ['s5h','s5m','s5s','s5cd','s5now'],
+  ];
+
+  ids.forEach(([hid,mid,sid,cdid,nowid])=>{
+    const hEl=document.getElementById(hid);
+    const mEl=document.getElementById(mid);
+    const sEl=document.getElementById(sid);
+    const cdEl=document.getElementById(cdid);
+    const nowEl=document.getElementById(nowid);
+    if(!hEl) return;
+    if(gone){
+      cdEl.style.display='none';
+      nowEl.style.display='block';
+    } else {
+      hEl.textContent=fmt(h);
+      mEl.textContent=fmt(m);
+      sEl.textContent=fmt(s);
+    }
+  });
+
+  const circ=213.6;
+  const rH=document.getElementById('s2rH');
+  const rM=document.getElementById('s2rM');
+  const rS=document.getElementById('s2rS');
+  if(rH){
+    rH.style.strokeDashoffset=gone?0:circ-(circ*(h%24)/24);
+    rM.style.strokeDashoffset=gone?0:circ-(circ*m/60);
+    rS.style.strokeDashoffset=gone?0:circ-(circ*s/60);
+  }
+}
+
+function pg(site, n) {
+  const s = document.getElementById(site);
+  s.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  s.querySelector('#'+site+'p'+n).classList.add('show');
+  s.querySelectorAll('.dots').forEach(g=>{
+    g.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===n-1));
+  });
+  window.scrollTo(0,0);
+}
+
+function flee(id) {
+  hits[id]=(hits[id]||0)+1;
+  const btn=document.getElementById(id);
+  const n=hits[id];
+  if(id==='s4nb') btn.classList.add('glitch'), setTimeout(()=>btn.classList.remove('glitch'),200);
+  const x=(Math.random()<.5?-1:1)*(80+Math.random()*160);
+  const y=(Math.random()<.5?-1:1)*(40+Math.random()*65);
+  btn.style.transform=`translate(${x}px,${y}px)`;
+  btn.style.transition=`transform ${Math.max(.04,.22-n*.015)}s`;
+  if(n>4) btn.style.opacity=Math.max(.05,1-n*.11);
+  const msgs={s1nb:['No','Nooo 😭','STOP 😂','bye 👋'],s2nb:['No','nope','gone 🌌','...'],s3nb:['No','gone 🌸','petal 🌹','...'],s4nb:['No','ERR_404','NO_SIGNAL','...'],s5nb:['No','nope ✨','🪄 poof!','gone!']};
+  if(n>8 && msgs[id]) btn.textContent=msgs[id][Math.min(3,Math.floor(n/4)-1)]||'...';
+  if(n>16) btn.style.display='none';
+}
+
+function celebrate() {
+  const cols=['#e91e63','#9c27b0','#ff6bb3','#ffeb3b','#00bcd4','#a78bfa','#f9a8d4','#fff','#00ffc8','#fde68a'];
+  for(let i=0;i<150;i++){
+    setTimeout(()=>{
+      const c=document.createElement('div');
+      c.className='conf-p';
+      c.style.cssText=`left:${Math.random()*100}vw;top:0;width:${5+Math.random()*10}px;height:${5+Math.random()*10}px;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${2+Math.random()*3.5}s;border-radius:${Math.random()>.5?'50%':'2px'};z-index:9999;position:fixed;pointer-events:none;`;
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(),6000);
+    },i*50);
+  }
+}
+
+function switchSite(n) {
+  document.querySelectorAll('.site').forEach(s=>s.classList.remove('visible'));
+  document.getElementById('s'+n).classList.add('visible');
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===n-1));
+  const bgs={1:'#030014',2:'#030014',3:'#0d0005',4:'#050510',5:'#1a0a2e'};
+  document.body.style.background=bgs[n];
+}
+
+function initStars() {
+  const el=document.getElementById('starsEl');
+  if(!el) return;
+  for(let i=0;i<150;i++){
+    const d=document.createElement('div');
+    d.className='star';
+    const sz=Math.random()*2.5+.5;
+    d.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${1.5+Math.random()*2}s;position:absolute;border-radius:50%;background:#fff;`;
+    el.appendChild(d);
+  }
+  setInterval(()=>{
+    const fh=document.createElement('div');
+    fh.className='fheart';
+    fh.textContent=Math.random()>.5?'💕':'✨';
+    fh.style.cssText=`left:${Math.random()*100}%;animation-duration:${6+Math.random()*5}s;top:100%;`;
+    document.getElementById('s1').appendChild(fh);
+    setTimeout(()=>fh.remove(),11000);
+  },1500);
+}
+
+tick();
+setInterval(tick,1000);
+initStars();
+</script>
